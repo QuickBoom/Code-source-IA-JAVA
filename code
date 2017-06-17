@@ -1,0 +1,71 @@
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+
+public class IA {
+	public static void main(String[] args) throws IOException {
+		int i = 0;
+		double proba = 0;
+		// TODO Auto-generated method stub
+		Scanner question = new Scanner(System.in);
+		System.out.println("Saisir question");
+		String question_taper = question.nextLine();
+		String analyse[] = question_taper.split(" ");
+		System.out.println(analyse.length);
+		int nombre = analyse.length;
+		try{
+			  FileInputStream fstream = new FileInputStream("Question.txt");
+			  DataInputStream in = new DataInputStream(fstream);
+			  BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			  String strLine;
+			  ArrayList<String> inventaire = new ArrayList<String>();
+			  ArrayList proba_list = new ArrayList();
+			  ArrayList proba_list_ligne = new ArrayList();
+			  while ((strLine = br.readLine()) != null)   {
+				  String proba2[] = strLine.split(" ");
+				  inventaire.add(strLine);
+				  for(i = 0;i < nombre; i++) {
+					  if (strLine.contains(analyse[i])){
+						  proba ++;
+					  }
+				  }
+				  double proba_int2 = proba2.length;
+				  double pourcentage = (proba/proba_int2)*100;
+				  System.out.println (inventaire.size()+ " "+strLine);
+				  System.out.println((double)pourcentage+" %");
+				  proba_list.add(pourcentage);
+				  proba_list_ligne.add(pourcentage);
+				  proba = 0;
+				  //System.out.println(proba_list.get(0));
+			  }
+			  Collections.sort(proba_list, Collections.reverseOrder());
+			  int meilleur = proba_list_ligne.indexOf(proba_list.get(0));
+			  System.out.println("---------------------------------------------------------------------------------");
+			  System.out.println(meilleur+1 + " "+proba_list.get(0)+" "+proba_list.get(1)+" "+proba_list.get(2));
+			  System.out.println(inventaire.get(meilleur));
+			  switch(meilleur+1){
+			  case 1:
+				  
+				  FileInputStream fstream2 = new FileInputStream("Comment_tu_vas.txt");
+				  DataInputStream in2 = new DataInputStream(fstream2);
+				  BufferedReader br2 = new BufferedReader(new InputStreamReader(in2));
+				  String strLine2;
+				  ArrayList<String> reponse1 = new ArrayList<String>();
+				  while ((strLine2 = br2.readLine()) != null)   {
+					 // System.out.println (reponse1.size()+1+ " "+strLine2);
+					  reponse1.add(strLine2);
+				  }
+				  Random rand = new Random();
+				  int Random = rand.nextInt(reponse1.size() - 1 + 1) + 1;
+				  System.out.println("L' IA répond : " + reponse1.get(Random));
+				  break;
+			  }
+		}finally{
+	
+
+}}}
