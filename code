@@ -16,7 +16,7 @@ public class IA {
 		System.out.println("Saisir question");
 		String question_taper = question.nextLine();
 		String analyse[] = question_taper.split(" ");
-		System.out.println(analyse.length);
+		//System.out.println(analyse.length);
 		int nombre = analyse.length;
 		try{
 			  FileInputStream fstream = new FileInputStream("Question.txt");
@@ -36,8 +36,8 @@ public class IA {
 				  }
 				  double proba_int2 = proba2.length;
 				  double pourcentage = (proba/proba_int2)*100;
-				  System.out.println (inventaire.size()+ " "+strLine);
-				  System.out.println((double)pourcentage+" %");
+				  //System.out.println (inventaire.size()+ " "+strLine);
+				  //System.out.println((double)pourcentage+" %");
 				  proba_list.add(pourcentage);
 				  proba_list_ligne.add(pourcentage);
 				  proba = 0;
@@ -45,12 +45,11 @@ public class IA {
 			  }
 			  Collections.sort(proba_list, Collections.reverseOrder());
 			  int meilleur = proba_list_ligne.indexOf(proba_list.get(0));
-			  System.out.println("---------------------------------------------------------------------------------");
-			  System.out.println(meilleur+1 + " "+proba_list.get(0)+" "+proba_list.get(1)+" "+proba_list.get(2));
-			  System.out.println(inventaire.get(meilleur));
+			  //System.out.println("---------------------------------------------------------------------------------");
+			  //System.out.println(meilleur+1 + " "+proba_list.get(0)+" "+proba_list.get(1)+" "+proba_list.get(2));
+			  //System.out.println(inventaire.get(meilleur));
 			  switch(meilleur+1){
 			  case 1:
-				  
 				  FileInputStream fstream2 = new FileInputStream("Comment_tu_vas.txt");
 				  DataInputStream in2 = new DataInputStream(fstream2);
 				  BufferedReader br2 = new BufferedReader(new InputStreamReader(in2));
@@ -62,7 +61,22 @@ public class IA {
 				  }
 				  Random rand = new Random();
 				  int Random = rand.nextInt(reponse1.size() - 1 + 1) + 1;
-				  System.out.println("L' IA répond : " + reponse1.get(Random));
+				  System.out.println("L' IA répond : " + reponse1.get(Random-1));
+				  break;
+				  
+			  case 2:
+				  FileInputStream fstream3 = new FileInputStream("Comment_tu_vas.txt");
+				  DataInputStream in3 = new DataInputStream(fstream3);
+				  BufferedReader br3 = new BufferedReader(new InputStreamReader(in3));
+				  String strLine3;
+				  ArrayList<String> reponse2 = new ArrayList<String>();
+				  while ((strLine3 = br3.readLine()) != null)   {
+					 // System.out.println (reponse1.size()+1+ " "+strLine2);
+					  reponse2.add(strLine3);
+				  }
+				  Random rand2 = new Random();
+				  int Random2 = rand2.nextInt(reponse2.size() - 1 + 1) + 1;
+				  System.out.println("L' IA répond : " + reponse2.get(Random2-1));
 				  break;
 			  }
 		}finally{
